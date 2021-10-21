@@ -52,13 +52,13 @@ describe('Testing food model', () => {
 
 describe('Testing restaurant model', () => {
   it('should throw a 201, if successful POST', async () => {
-    const response = await restaurant.post('/restaurant').send({
+    const response = await request.post('/restaurant').send({
       title:'Dominos',
       typeOfFood:'Pizza',
     });
-    expect(response.id).toBe(1);
-    expect(response.title).toEqual('Dominos');
-    expect(response.typeOfFood).toEqual('Pizza');
+    expect(response.body.id).toBe(1);
+    expect(response.body.title).toEqual('Dominos');
+    expect(response.body.typeOfFood).toEqual('Pizza');
   });
 
   it('should throw a 200, if successful GET', async () => {
@@ -68,18 +68,17 @@ describe('Testing restaurant model', () => {
   });
 
   it('should throw a 200, if successful GET by ID', async () => {
-    const response = await request.get('/restaurant?id=1');
+    const response = await request.get('/restaurant/1');
     expect(response.status).toBe(200);
-    expect(response.body.length).toBe(1);
+    expect(response.body.id).toBe(1);
   });
 
   it('should throw a 200, if successful UPDATE', async () => {
-    const findId = await restaurant.findOne({where: {id: 1}});
-    const foundRestaurant = await findId.update({
+    const response = await request.put('/restaurant/1').send({
       title:'Dominos',
       typeOfFood:'Pizza',
     });
-    expect(foundRestaurant.id).toEqual(1);
+    expect(response.status).toEqual(200);
   });
 
   it('should throw a 204, if successful DESTROY', async () =>{
