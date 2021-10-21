@@ -7,7 +7,7 @@ const food = (sequelize, DataTypes) => sequelize.define('food', {
   },
   typeOfFood:{
     type: DataTypes.STRING,
-    allowNull: true,
+    allowNull: false,
   },
 });
 

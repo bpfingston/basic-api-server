@@ -7,7 +7,7 @@ const restaurant = (sequelize, DataTypes) => sequelize.define('restaurant', {
   },
   typeOfFood:{
     type: DataTypes.STRING,
-    allowNull: true,
+    allowNull: false,
   },
 });
   
